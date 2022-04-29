@@ -4,31 +4,34 @@ const student1 = {name: "Bob", age: 17}
 const student2 = {name: "Susy", age: 18}
 const student3 = {name: "Ted", age: 18}
 
-const students = [
+const studentsList = [
     {name: "Bob", age: 17},
     {name: "Susy", age: 18},
     {name: "Ted", age: 18}
-]
+];
 
-console.log(students[1])
-
-console.log(students[1].age)
-console.log(students[students.indexOf("Susy")]) // Thsi will not work
+console.log(studentsList[1])
+console.log(studentsList[1].age) // dot notation to access the age
 
 const Bob = {name: "Bob", age: 17}
 const Susy = {name: "Susy", age: 18}
 const Ted = {name: "Ted", age: 18}
 
-const studentsObj = {
-    Bob: {name: "Bob", age: 17},
-    Susy : {name: "Susy", age: 18},
-    Ted : {name: "Ted", age: 18}
+const studentDictionary = {
+    "Bob": Bob,
+    "Susy": Susy,
+    Ted // This is equivalent "Ted": Ted
+    }
+
+console.log(studentDictionary.Susy.age)
+
+for(const student in studentDictionary){ // for...in is sugar sintax for object 
+    console.log(studentDictionary[student].age);
 }
 
-console.log(studentsObj.Susy.age)
-studentsObj.hasOwnProperty("Susy")
-studentsObj.hasOwnProperty("Marco")
-
+for (const student of studentsList){ // for...of is sugar sintax for arrays 
+    console.log(studentsList.age)
+}
 
 const classroom = {
     marco: { name: "Marco", friends: [{name: "Paolo", age: 49}] },
@@ -36,12 +39,14 @@ const classroom = {
     carol: { name: "Carol", friends: [{name: "Bob", age: 17}, {name: "Susy", age: 18}, {name: "Ted", age: 18}] }
 }
 
+console.log(classroom.carlos.friends[0].age)
 console.log(classroom.carlos.friends.length)
 
-for(const friend of classroom.carol.friends) console.log(friend.name)
-
+console.log(classroom.marco.friends.push(classroom.carol))
 
 // Example 2
+
+// Array of objects
 
     const drinks = [
         {
@@ -56,10 +61,25 @@ for(const friend of classroom.carol.friends) console.log(friend.name)
             sugar: true,
             price: 3,
             weight: .96,
-            ingredients: ['fantasía', 'alcohol', 'mabad decisions']
+            ingredients: ['fantasía', 'alcohol', 'bad decisions']
         }
     ]
 
+// Obtain ingredients of Fanta
+for (ingredients of drinks[0].ingredients){
+    console.log(`One ingredient is`, ingredients)
+}
+
+// short path
+    console.log(drinks[0].ingredients)
+
+for (const drink of drinks){
+    for (const ingredient of drink.ingredients) {
+      console.log(`One ingredient of ${drink}: `, ingredient);
+    }
+}
+
+/*
     // Array of objects iteration
     for (let i = 0; i < drinks.length; i++) {
 
@@ -69,9 +89,4 @@ for(const friend of classroom.carol.friends) console.log(friend.name)
             console.log('- ', drinks[i].ingredients[j])
         }
     }
-
-
-    drinks.forEach(drink => {
-        console.log(`The drink ${drink.name} weight ${drink.weight}. The ingredients are:`)
-        drink.ingredients.forEach(ing => console.log('- ', ing))
-    })
+*/
